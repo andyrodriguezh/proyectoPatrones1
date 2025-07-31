@@ -13,7 +13,9 @@ public class UnitSelectorManager : MonoBehaviour
     
     public LayerMask clickable;
     public LayerMask ground;
+    public LayerMask attackable;
     public GameObject groundMarker;
+    public bool attacCursorVisible;
 
     private Camera cam;
     
@@ -71,9 +73,52 @@ public class UnitSelectorManager : MonoBehaviour
               groundMarker.SetActive(true);
                 
             }
+        } 
         
-    } 
+        if (unitsSelected.Count > 0&& AtleastOneOffensiveUnite(unitsSelected))
+        {
+            RaycastHit hit;
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, attackable))
+            {
+
+                attacCursorVisible = true;
+                if (Input.GetMouseButtonDown(1))
+                {
+                    Transform target = hit.transform;
+
+                    foreach (GameObject unit in unitsSelected)
+                    {
+                        if (unit.GetComponent<AttackController>())
+                        {
+                            unit.GetComponent<AttackController>().targetToAttack = target;
+                        }
+                    }
+                    
+                }
+                
+            }
+        }
+        else
+        {
+            attacCursorVisible = false;  
+        }
+        
     }
+
+    private bool AtleastOneOffensiveUnite(List<GameObject> unitsSelected)
+    {
+        foreach (GameObject unit in unitsSelected)
+        {
+            if (unit.GetComponent<AttackController>())
+            {
+                return true;
+            }
+            
+        }
+        return false;
+    }
+
     private void multiSelect(GameObject unit)
     {
         if (unitsSelected.Contains(unit) == false)
