@@ -128,17 +128,7 @@ public class Miner : MonoBehaviour
             Debug.Log("Minero: La mina no tiene suficiente oro para extraer");
         }
     }
-
-    void OnGUI()
-    {
-        GUI.Label(new Rect(10, 10, 300, 150),
-            $"<b>Minero:</b> {gameObject.name}\n" +
-            $"Estado: {currentState}\n" +
-            $"Mina: {(targetMine != null ? targetMine.name : "Ninguna")}\n" +
-            $"Distancia: {(targetMine != null ? Vector3.Distance(transform.position, targetMine.transform.position).ToString("F2") : "N/A")}\n" +
-            $"Radio minería: {miningRadius}\n" +
-            $"Temporizador: {miningTimer:F1}/{miningRate}");
-    }
+    
 
     void OnDrawGizmosSelected()
     {
