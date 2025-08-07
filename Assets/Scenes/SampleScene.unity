@@ -230,6 +230,25 @@ Transform:
   - {fileID: 330585546}
   m_Father: {fileID: 1672120513}
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+--- !u!1 &323438971 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4918298352899936138, guid: b918b61462fde4f418e0263299ae5165, type: 3}
+  m_PrefabInstance: {fileID: 1264773323}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &323438982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323438971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08deacabf4a042e7b4875cd9ad4013f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetMine: {fileID: 0}
+  extractKey: 101
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,114 +752,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &872485633
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 872485637}
-  - component: {fileID: 872485636}
-  - component: {fileID: 872485635}
-  - component: {fileID: 872485634}
-  m_Layer: 0
-  m_Name: DepositoOro
-  m_TagString: Untagged
-  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &872485634
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 872485633}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &872485635
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 872485633}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &872485636
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 872485633}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &872485637
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 872485633}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100.4, y: 5.8, z: 38.6}
-  m_LocalScale: {x: 10, y: 10, z: 10}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &914011444
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,6 +764,7 @@ GameObject:
   - component: {fileID: 914011447}
   - component: {fileID: 914011446}
   - component: {fileID: 914011445}
+  - component: {fileID: 914011449}
   m_Layer: 0
   m_Name: MinaOro
   m_TagString: Untagged
@@ -943,12 +855,32 @@ Transform:
   m_GameObject: {fileID: 914011444}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.7, y: 5, z: 7.5}
+  m_LocalPosition: {x: 80.7, y: 5, z: 27.5}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &914011449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914011444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed3b3672b4fc40658bef85d905fcee11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentGold: 1000
+  maxGold: 1000
+  rechargeRate: 10
+  rechargeInterval: 5
+  goldPerExtraction: 10
+  extractionTime: 2
+  showDebugInfo: 1
+  debugInterval: 2
 --- !u!1 &1037612990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,7 +1504,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4918298352899936138, guid: b918b61462fde4f418e0263299ae5165, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 323438982}
   m_SourcePrefab: {fileID: 100100000, guid: b918b61462fde4f418e0263299ae5165, type: 3}
 --- !u!1001 &1479699337
 PrefabInstance:
@@ -1644,6 +1579,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1672120513}
+  - component: {fileID: 1672120514}
   m_Layer: 0
   m_Name: CamaraP
   m_TagString: Untagged
@@ -1667,6 +1603,20 @@ Transform:
   - {fileID: 161331326}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+--- !u!114 &1672120514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672120512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08deacabf4a042e7b4875cd9ad4013f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetMine: {fileID: 914011449}
+  extractKey: 101
 --- !u!1001 &1981565673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1886,4 +1836,3 @@ SceneRoots:
   - {fileID: 1057187003}
   - {fileID: 1038497888}
   - {fileID: 914011448}
-  - {fileID: 872485637}
