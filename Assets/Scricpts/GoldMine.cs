@@ -1,23 +1,38 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class GoldMine : MonoBehaviour
+// Interfaz 
+public interface IGoldMineObserver
+{
+    void OnGoldChanged(GoldMine mine, int currentGold, int maxGold);
+}
+
+// Interfaz para el publicador (la mina)
+public interface IGoldMineSubject
+{
+    void AddObserver(IGoldMineObserver observer);
+    void RemoveObserver(IGoldMineObserver observer);
+    void NotifyObservers();
+}
+
+public class GoldMine : MonoBehaviour, IGoldMineSubject
 {
     [Header("Configuración de Recursos")]
-    public int currentGold = 1000;           // Cantidad actual de oro
-    public int maxGold = 1000;               // Capacidad máxima
-    public int rechargeRate = 10;            // Cantidad de oro recargado por intervalo
-    public float rechargeInterval = 5f;      // Intervalo de recarga en segundos
+    public int currentGold = 1000;
+    public int maxGold = 1000;
+    public int rechargeRate = 10;
+    public float rechargeInterval = 5f;
 
     [Header("Configuración de Extracción")]
-    public int goldPerExtraction = 10;       // Oro extraído por operación
-    public float extractionTime = 2f;        // Tiempo necesario para extraer
+    public int goldPerExtraction = 10;
+    public float extractionTime = 2f;
 
     private bool isRecharging = false;
+    private List<IGoldMineObserver> observers = new List<IGoldMineObserver>();
 
     private void Start()
     {
-        // Iniciar la recarga automática
         StartCoroutine(RechargeOverTime());
     }
 
@@ -32,6 +47,9 @@ public class GoldMine : MonoBehaviour
             return 0;
 
         currentGold -= goldPerExtraction;
+        
+        NotifyObservers();
+
         return goldPerExtraction;
     }
 
@@ -46,32 +64,36 @@ public class GoldMine : MonoBehaviour
             if (currentGold < maxGold)
             {
                 currentGold = Mathf.Min(currentGold + rechargeRate, maxGold);
+                NotifyObservers();
             }
+        }
+    }
+
+    // Implementación 
+    public void AddObserver(IGoldMineObserver observer)
+    {
+        if (!observers.Contains(observer))
+        {
+            observers.Add(observer);
+        }
+    }
+
+    public void RemoveObserver(IGoldMineObserver observer)
+    {
+        observers.Remove(observer);
+    }
+
+    public void NotifyObservers()
+    {
+        foreach (var observer in observers)
+        {
+            observer.OnGoldChanged(this, currentGold, maxGold);
         }
     }
 
     private void OnDrawGizmos()
     {
-        // Zona de interacción para los mineros
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, 3f);
-    }
-    
-    [Header("Depuración")]
-    public bool showDebugInfo = true;
-    public float debugInterval = 2f;
-    private float debugTimer;
-
-    private void Update()
-    {
-        if (showDebugInfo)
-        {
-            debugTimer += Time.deltaTime;
-            if (debugTimer >= debugInterval)
-            {
-                Debug.Log($"Mina: {gameObject.name} - Oro actual: {currentGold}/{maxGold}");
-                debugTimer = 0f;
-            }
-        }
     }
 }

@@ -1,11 +1,87 @@
 using UnityEngine;
-using UnityEngine.AI;
 using System.Collections;
 
+// Interfaz base para los estados del minero
+public interface IMinerState
+{
+    void Enter(Miner miner);
+    void Update(Miner miner);
+    void Exit(Miner miner);
+}
+
+// Estado base del minero
+public class MinerIdleState : IMinerState
+{
+    public void Enter(Miner miner)
+    {
+        miner.GetComponent<AttackController>().SetIdlematerial();
+        Debug.Log($"Minero {miner.gameObject.name}: Entrando en estado Idle");
+    }
+
+    public void Update(Miner miner)
+    {
+        if (miner.targetMine != null)
+        {
+            float distanceToMine = Vector3.Distance(miner.transform.position, miner.targetMine.transform.position);
+            if (distanceToMine <= miner.miningRadius)
+            {
+                miner.ChangeState(new MinerMiningState());
+            }
+        }
+    }
+
+    public void Exit(Miner miner)
+    {
+        Debug.Log($"Minero {miner.gameObject.name}: Saliendo de estado Idle");
+    }
+}
+
+// Estado Mining del minero
+public class MinerMiningState : IMinerState
+{
+    private float miningTimer = 0f;
+
+    public void Enter(Miner miner)
+    {
+        miner.GetComponent<AttackController>().SetAttackmaterial();
+        miningTimer = 0f;
+        Debug.Log($"Minero {miner.gameObject.name}: Entrando en estado Mining");
+    }
+
+    public void Update(Miner miner)
+    {
+        if (miner.targetMine == null)
+        {
+            miner.ChangeState(new MinerIdleState());
+            return;
+        }
+
+        float distanceToMine = Vector3.Distance(miner.transform.position, miner.targetMine.transform.position);
+        if (distanceToMine > miner.miningRadius)
+        {
+            miner.ChangeState(new MinerIdleState());
+            return;
+        }
+
+        miningTimer += Time.deltaTime;
+        if (miningTimer >= miner.miningRate)
+        {
+            miningTimer = 0f;
+            miner.ExtractGold();
+        }
+    }
+
+    public void Exit(Miner miner)
+    {
+        Debug.Log($"Minero {miner.gameObject.name}: Saliendo de estado Mining");
+    }
+}
+
+// Implementación de la clase Miner que utilizará los estados
 public class Miner : MonoBehaviour
 {
     [Header("Configuración de Minería")]
-    public float miningRadius = 5f; // Incrementado para mayor tolerancia
+    public float miningRadius = 5f;
     public float miningRate = 2f;
 
     [Header("Equipo")]
@@ -14,108 +90,51 @@ public class Miner : MonoBehaviour
     [Header("Referencias")]
     public GoldMine targetMine;
 
-    // Estados del minero
-    public enum MinerState { Idle, Mining }
-    public MinerState currentState = MinerState.Idle;
-
-    // Componentes
-    private AttackController attackController;
-
-    // Variables de control
-    private float miningTimer = 0f;
+    private IMinerState currentState;
 
     void Start()
     {
-        attackController = GetComponent<AttackController>();
-        attackController.SetIdlematerial();
+        // Inicio en estado Idle
+        ChangeState(new MinerIdleState());
     }
 
     void Update()
     {
-        // Si no hay mina asignada, no hacemos nada
-        if (targetMine == null)
+        if (currentState != null)
         {
-            if (currentState != MinerState.Idle)
-            {
-                SetState(MinerState.Idle);
-            }
-            return;
-        }
-
-        // Calcular distancia a la mina
-        float distanceToMine = Vector3.Distance(transform.position, targetMine.transform.position);
-        
-        // Actualizar estado según la distancia a la mina
-        if (distanceToMine <= miningRadius)
-        {
-            // Estamos lo suficientemente cerca para minar
-            if (currentState != MinerState.Mining)
-            {
-                SetState(MinerState.Mining);
-            }
-            
-            // Si estamos en estado de minería, extraer oro cada cierto tiempo
-            if (currentState == MinerState.Mining)
-            {
-                miningTimer += Time.deltaTime;
-                if (miningTimer >= miningRate)
-                {
-                    miningTimer = 0f;
-                    ExtractGold();
-                }
-            }
-        }
-        else
-        {
-            // Estamos demasiado lejos para minar
-            if (currentState != MinerState.Idle)
-            {
-                SetState(MinerState.Idle);
-            }
+            currentState.Update(this);
         }
     }
 
-    private void SetState(MinerState newState)
+    public void ChangeState(IMinerState newState)
     {
-        if (currentState == newState)
-            return;
-            
-        Debug.Log($"Minero {gameObject.name}: Cambiando estado de {currentState} a {newState}");
-        
+        if (currentState != null)
+        {
+            currentState.Exit(this);
+        }
+
         currentState = newState;
-        
-        switch (newState)
+
+        if (currentState != null)
         {
-            case MinerState.Idle:
-                attackController.SetIdlematerial();
-                miningTimer = 0f;
-                break;
-                
-            case MinerState.Mining:
-                attackController.SetAttackmaterial();
-                miningTimer = 0f;
-                break;
+            currentState.Enter(this);
         }
     }
 
-    private void ExtractGold()
+    public void ExtractGold()
     {
         if (targetMine == null)
             return;
-
-        Debug.Log($"Minero: Intentando extraer oro de {targetMine.name}");
 
         if (targetMine.CanExtractGold())
         {
             int extractedGold = targetMine.ExtractGold();
-            Debug.Log($"Minero: ¡Extracción exitosa! Obtuvo {extractedGold} unidades de oro");
 
             if (ResourceManager.Instance != null)
             {
                 if (isPlayer)
                 {
                     ResourceManager.Instance.AddPlayerGold(extractedGold);
-                    Debug.Log($"Oro del jugador: {ResourceManager.Instance.playerGold}");
                 }
                 else
                 {
@@ -123,12 +142,7 @@ public class Miner : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            Debug.Log("Minero: La mina no tiene suficiente oro para extraer");
-        }
     }
-    
 
     void OnDrawGizmosSelected()
     {
