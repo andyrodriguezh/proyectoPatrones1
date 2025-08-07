@@ -235,7 +235,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4918298352899936138, guid: b918b61462fde4f418e0263299ae5165, type: 3}
   m_PrefabInstance: {fileID: 1264773323}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &323438982
+--- !u!114 &323438983
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,11 +244,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 323438971}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08deacabf4a042e7b4875cd9ad4013f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 489f0112ec274ec6aef256205a81815e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetMine: {fileID: 0}
-  extractKey: 101
+  miningRadius: 7
+  miningRate: 2
+  isPlayer: 1
+  targetMine: {fileID: 914011449}
+  currentState: 2
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,7 +794,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 10, z: 10}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &914011446
 MeshRenderer:
@@ -854,13 +857,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914011444}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.021184487, y: -0, z: -0, w: 0.9997756}
   m_LocalPosition: {x: 80.7, y: 5, z: 27.5}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 2.428, y: 0, z: 0}
 --- !u!114 &914011449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1489,6 +1492,18 @@ PrefabInstance:
       propertyPath: facingCamera
       value: 
       objectReference: {fileID: 330585545}
+    - target: {fileID: 4763921078852967159, guid: b918b61462fde4f418e0263299ae5165, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763921078852967159, guid: b918b61462fde4f418e0263299ae5165, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4763921078852967159, guid: b918b61462fde4f418e0263299ae5165, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4918298352899936138, guid: b918b61462fde4f418e0263299ae5165, type: 3}
       propertyPath: m_Name
       value: Recolector
@@ -1507,8 +1522,55 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4918298352899936138, guid: b918b61462fde4f418e0263299ae5165, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 323438982}
+      addedObject: {fileID: 323438983}
   m_SourcePrefab: {fileID: 100100000, guid: b918b61462fde4f418e0263299ae5165, type: 3}
+--- !u!1 &1405513126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1405513128}
+  - component: {fileID: 1405513127}
+  m_Layer: 0
+  m_Name: ResourceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1405513127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405513126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0470b38e67f04c439c3e3cc868f14e81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerGold: 0
+  enemyGold: 0
+  playerGoldText: {fileID: 0}
+--- !u!4 &1405513128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405513126}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 68.13239, y: 38.50999, z: 77.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1479699337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1579,7 +1641,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1672120513}
-  - component: {fileID: 1672120514}
   m_Layer: 0
   m_Name: CamaraP
   m_TagString: Untagged
@@ -1603,20 +1664,6 @@ Transform:
   - {fileID: 161331326}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
---- !u!114 &1672120514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672120512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08deacabf4a042e7b4875cd9ad4013f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetMine: {fileID: 914011449}
-  extractKey: 101
 --- !u!1001 &1981565673
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1836,3 +1883,4 @@ SceneRoots:
   - {fileID: 1057187003}
   - {fileID: 1038497888}
   - {fileID: 914011448}
+  - {fileID: 1405513128}
