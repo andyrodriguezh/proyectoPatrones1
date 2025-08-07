@@ -6,6 +6,8 @@ using UnityEngine.UIElements;
 
 public class UnitSelectorManager : MonoBehaviour
 {
+	// PATRÓN: SINGLETON
+    // Se usa una propiedad estática Instance para mantener una sola instancia.
     public static UnitSelectorManager Instance { get; set; }
             
     public List<GameObject> allUnitsList=new List<GameObject>();
@@ -18,7 +20,8 @@ public class UnitSelectorManager : MonoBehaviour
     public bool attacCursorVisible;
 
     private Camera cam;
-    
+       // PATRÓN: SINGLETON
+    // Garantiza que solo exista una instancia de UnitSelectorManager.
     private void Awake()
     {
         if (Instance != null && Instance != this)

@@ -24,11 +24,33 @@ public class Unit : MonoBehaviour
         }
         
     }
+    
+    public void ReceiveHealing(int amount)
+    {
+        unitsHealth = Mathf.Min(unitsHealth + amount, unitMaxHealth);
+        UpdateHealthUI();
+    }
+
+    public float GetHealthPercentage()
+    {
+        return unitsHealth / unitMaxHealth;
+    }
+
+
+
 
     private void OnDestroy()
     {
-        UnitSelectorManager.Instance.allUnitsList.Remove(gameObject);  
+        // Proteger si el selector no aplica (enemigos no lo usan)
+        if (UnitSelectorManager.Instance != null)
+        {
+            UnitSelectorManager.Instance.allUnitsList.Remove(gameObject);
+        }
     }
+
+
+    
+
 
 
     public void TakeDamage(int damageToInflict)
