@@ -2,54 +2,59 @@ using System.Collections.Generic;
 using StructureAssets.StructureScripts;
 using UnityEngine;
 
-public class ResourceManager : MonoBehaviour
+namespace StructureAssets.StructureScripts
 {
-    public static ResourceManager Instance { get; private set; }
-    
-    private Dictionary<string, int> resources = new();
 
-    private void Awake()
+    public class ResourceManager : MonoBehaviour
     {
-        if (Instance != null && Instance != this)
+        public static ResourceManager Instance { get; private set; }
+
+        private Dictionary<string, int> resources = new();
+
+        private void Awake()
         {
-            Destroy(gameObject);
-            return;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+
+            //Recursos quemados para prueba
+            resources["Gold"] = 500;
         }
 
-        Instance = this;
-
-        //Recursos quemados para prueba
-        resources["Gold"] = 500;
-    }
-
-    public bool HasEnoughResources(List<BuildRequirement> requirements)
-    {
-        foreach (BuildRequirement req in requirements)
+        public bool HasEnoughResources(List<BuildRequirement> requirements)
         {
-            if (!resources.ContainsKey(req.resource) || resources[req.resource] < req.amount)
+            foreach (BuildRequirement req in requirements)
             {
-                return false;
+                if (!resources.ContainsKey(req.resource) || resources[req.resource] < req.amount)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public void ConsumeResources(List<BuildRequirement> requirements)
+        {
+            foreach (BuildRequirement req in requirements)
+            {
+                if (resources.ContainsKey(req.resource))
+                {
+                    resources[req.resource] -= req.amount;
+                }
             }
         }
-        return true;
-    }
 
-    public void ConsumeResources(List<BuildRequirement> requirements)
-    {
-        foreach (BuildRequirement req in requirements)
+        public void PrintResources()
         {
-            if (resources.ContainsKey(req.resource))
+            foreach (var res in resources)
             {
-                resources[req.resource] -= req.amount;
+                Debug.Log($"{res.Key}: {res.Value}");
             }
-        }
-    }
-    
-    public void PrintResources()
-    {
-        foreach (var res in resources)
-        {
-            Debug.Log($"{res.Key}: {res.Value}");
         }
     }
 }

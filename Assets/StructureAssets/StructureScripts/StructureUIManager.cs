@@ -1,4 +1,60 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace StructureAssets.StructureScripts
+{
+    public class StructureUIManager : MonoBehaviour, IStructureSelectionObserver
+    {
+        [SerializeField] private StructureSelectionNotifier notifier;
+        [SerializeField] private MilitaryBuildingUI militaryUI;
+
+        private readonly Dictionary<Type, IStructureUIFacade> map = new();
+        private IStructureUIFacade active;
+
+        private void Awake()
+        {
+            if (!notifier) notifier = FindFirstObjectByType<StructureSelectionNotifier>();
+			
+            map[typeof(MilitaryBuilding)] = militaryUI;
+
+            HideAll();
+        }
+
+        private void OnEnable()
+        {
+            notifier?.RegisterObserver(this);
+        }
+
+        private void OnDisable()
+        {
+            notifier?.UnregisterObserver(this);
+        }
+
+        public void OnStructureSelected(IStructure structure)
+        {
+			 HideAll();
+    		if (structure == null) return;
+
+    		if (map.TryGetValue(structure.GetType(), out var facade))
+    		{
+        		active = facade;
+        		active.ShowPanel(structure);
+    		}
+
+        }
+
+        public void OnSelectionCleared() => HideAll();
+
+        private void HideAll()
+        {
+            foreach (var f in map.Values) f.HidePanel();
+            active = null;
+        }
+    }
+}
+
+/*using System.Collections.Generic;
 using UnityEngine;
 
 namespace StructureAssets.StructureScripts
@@ -54,4 +110,4 @@ namespace StructureAssets.StructureScripts
             return mb != null && mb.gameObject.activeInHierarchy;
         }
     }
-}
+}*/
