@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private Camera sceneCamera;
     [SerializeField] private LayerMask placementLayerMask;
 
-    [SerializeField]  private Vector3 lastPosition;
+    [SerializeField] private Vector3 lastPosition;
 
     public event Action OnClicked, OnExit;
 
@@ -23,7 +23,6 @@ public class InputManager : MonoBehaviour
     }
 
     public bool IsPointerOverUI() => EventSystem.current.IsPointerOverGameObject();
-
 
     public Vector3 GetSelectedMapPosition()
     {

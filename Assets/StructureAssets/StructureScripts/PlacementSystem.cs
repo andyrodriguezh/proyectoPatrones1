@@ -38,8 +38,7 @@ public class PlacementSystem : MonoBehaviour
             Debug.LogError($"ObjectData con ID {ID} no encontrado.");
             return;
         }
-
-        // Pasar el ObjectData directamente al PlacementState
+        
         buildingState = new PlacementState(selectedObjectData, grid, previewSystem, floorData, furnitureData, objectPlacer);
 
         inputManager.OnClicked += PlaceStructure;

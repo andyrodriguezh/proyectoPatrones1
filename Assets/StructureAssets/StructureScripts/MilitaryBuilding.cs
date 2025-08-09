@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace StructureAssets.StructureScripts
 {
-    public class MilitaryBuilding : MonoBehaviour, IStructure
+    public class MilitaryBuilding : MonoBehaviour, IStructure //Factory Method
     {
         [SerializeField] private GameObject baseUnitPrefab;
         [SerializeField] private GameObject longDistanceUnitPrefab;

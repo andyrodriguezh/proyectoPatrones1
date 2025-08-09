@@ -20,26 +20,26 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 2318559926197995587, guid: f509f0f2a9ea2e64a98d2497df900f98, type: 3}
     <requirements>k__BackingField:
     - resource: Gold
-      amount: 50
+      amount: 85
     <benefits>k__BackingField: []
     <Type>k__BackingField: 0
   - <Name>k__BackingField: MilitaryBuilding
-    <ID>k__BackingField: 1
+    <ID>k__BackingField: 2
     description: 
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 2318559926197995587, guid: b79240c6961b87743a7d78a3668f8b0d, type: 3}
     <requirements>k__BackingField:
     - resource: Gold
-      amount: 65
+      amount: 125
     <benefits>k__BackingField: []
     <Type>k__BackingField: 2
   - <Name>k__BackingField: ResourceRecolector
-    <ID>k__BackingField: 2
+    <ID>k__BackingField: 1
     description: 
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 2318559926197995587, guid: efbf7cf6735def041bb02ebfb4b9d59f, type: 3}
     <requirements>k__BackingField:
     - resource: Gold
-      amount: 30
+      amount: 40
     <benefits>k__BackingField: []
     <Type>k__BackingField: 1

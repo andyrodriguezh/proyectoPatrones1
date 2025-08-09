@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1229676393744977835}
   - component: {fileID: 5616587290532763039}
   - component: {fileID: -4156823247083948654}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: MilitaryBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -304.4, y: 0, z: -253.9}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8177131810228255901}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 7413217623995983014}
   - component: {fileID: 6426675994503195435}
   - component: {fileID: 4442509761952943785}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
