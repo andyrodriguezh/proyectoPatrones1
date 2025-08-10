@@ -3,45 +3,53 @@ using UnityEngine.AI;
 
 public class UnitFollowState : StateMachineBehaviour
 {
-    AttackController attackController;
-    
-    NavMeshAgent agent;
-    public float attackingdistance=4f;
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    private AttackController attackController;
+    private NavMeshAgent agent;
+
+    // Al entrar al estado, obtener referencias necesarias
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         attackController = animator.transform.GetComponent<AttackController>();
         agent = animator.transform.GetComponent<NavMeshAgent>();
-        attackController.Setfollowmaterial();
+       
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    // Lógica de seguimiento al objetivo
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
-        if (attackController.targetToAttack == null)
+        
+        if (attackController.targetToAttack == null || 
+            !attackController.targetToAttack.gameObject.activeInHierarchy)
         {
-            animator.SetBool("isFollowing",false);
+            animator.SetBool("isFollowing", false);
+            attackController.targetToAttack = null;
+            return;
         }
-        else
+
+        if (!animator.transform.GetComponent<UnitMovement>().isCommandedToMove)
         {
-            if (animator.transform.GetComponent<UnitMovement>().isCommandedToMove == false)
+            float attackRange = attackController.GetAttackRange();
+            float distanceToTarget = Vector3.Distance(
+                attackController.targetToAttack.position,
+                animator.transform.position
+            );
+
+            // Si aún no está en rango, continuar siguiendo
+            if (distanceToTarget > attackRange)
             {
-                agent.SetDestination(attackController.targetToAttack.position);
-                animator.transform.LookAt(attackController.targetToAttack);
-        
-                float distanceForTarget=Vector3.Distance(attackController.targetToAttack.position,animator.transform.position);
-                if (distanceForTarget < attackingdistance)
-                {
-                  agent.SetDestination(animator.transform.position);
-                    animator.SetBool("isAttacking",true);
-                } 
+                if (agent.isOnNavMesh)
+                    agent.SetDestination(attackController.targetToAttack.position);
             }
-        }
-        
-        
-        
-    }
+            // Si está en rango, detenerse y atacar (o curar si es healer)
+            else
+            {
+                if (agent.isOnNavMesh)
+                    agent.SetDestination(animator.transform.position);
 
-    
+                animator.SetBool("isAttacking", true);
+            }
+
+            animator.transform.LookAt(attackController.targetToAttack);
+        }
+    }
 }
