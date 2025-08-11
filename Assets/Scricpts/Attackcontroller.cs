@@ -1,58 +1,101 @@
-using System;
 using UnityEngine;
 
 public class AttackController : MonoBehaviour
 {
     public Transform targetToAttack;
-    
     public Material idleStateMaterial;
     public Material followStateMaterial;
     public Material attackStateMaterial;
-    
+
     public bool isPlayer;
     public int unitDamage;
+    [SerializeField] private bool isHealerUnit;
+    [SerializeField] private int healAmount = 10;
+
+    [SerializeField] private bool isRangedUnit;            // Definido en el inspector
+    [SerializeField] private float customAttackRange = 2f; // Configurable en el inspector
+
+    private IAttackStrategy attackStrategy;
+
+    private void Start()
+    {
+        if (isHealerUnit)
+            attackStrategy = new HealStrategy(customAttackRange, healAmount);
+        else if (isRangedUnit)
+            attackStrategy = new RangedAttackStrategy(customAttackRange);
+        
+        else
+            attackStrategy = new MeleeAttackStrategy(customAttackRange);
+
+    }
+
+    public void PerformAttack()
+    {
+        if (targetToAttack == null || !targetToAttack.gameObject.activeInHierarchy)
+            return;
+
+        attackStrategy?.ExecuteAttack(this);
+    }
+
+
+
+
+    public float GetAttackRange()
+    {
+        return attackStrategy != null ? attackStrategy.GetAttackRange() : 2.0f;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isPlayer && other.CompareTag("Enemy") && targetToAttack == null)
+        if (targetToAttack != null) return;
+
+        if (isHealerUnit)
         {
-            targetToAttack= other.transform;
+            // Detectar aliados por equipo (no enemigos)
+            bool sameTeam = (isPlayer && other.CompareTag("Player")) || (!isPlayer && other.CompareTag("Enemy"));
+
+            if (sameTeam)
+            {
+                Unit unit = other.GetComponent<Unit>();
+                if (unit != null && unit.GetHealthPercentage() < 1.0f)
+                {
+                    targetToAttack = other.transform;
+                    Debug.Log($"{name} detectó aliado herido: {other.name}");
+                }
+            }
+        }
+        else if (isPlayer && other.CompareTag("Enemy"))
+        {
+            targetToAttack = other.transform;
+        }
+        else if (!isPlayer && other.CompareTag("Player"))
+        {
+            targetToAttack = other.transform;
         }
     }
+
+
+
+
+    public bool IsHealer()
+    {
+        return isHealerUnit;
+    }
+   
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy") && targetToAttack != null)
+        if (targetToAttack != null &&
+            ((isPlayer && other.CompareTag("Enemy")) || (!isPlayer && other.CompareTag("Player"))))
         {
-            targetToAttack= null;
+            targetToAttack = null;
         }
     }
 
-    public void SetIdlematerial()
-    {
-        GetComponent<Renderer>().material = idleStateMaterial;
-    }
-    public void Setfollowmaterial()
-    {
-        GetComponent<Renderer>().material = followStateMaterial;
-    }
-    public void SetAttackmaterial()
-    {
-        GetComponent<Renderer>().material = attackStateMaterial; 
-    }
 
+    
+    
+    
 
-    private void OnDrawGizmos()
-    {
-        //seguir
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position,10f);
-        //atacar
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position,2.5f);
-        //dejar de atacar
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position,3f);
-        
-    }
+    
 }

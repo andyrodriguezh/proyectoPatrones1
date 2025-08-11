@@ -1,72 +1,73 @@
 using UnityEngine;
-using UnityEngine.AI; 
+using UnityEngine.AI;
 
 public class UnitAttackState : StateMachineBehaviour
 {
-    NavMeshAgent agent; 
+    NavMeshAgent agent;
     AttackController attackController;
 
+    public float attackRate = 2f;
+    private float attackTimer;
 
-
-    public float stopAttackingDistance = 2f;
-
-    public float attackRate=2f;
-    private float attckTimer;
-    
-
-    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent = animator.GetComponent<NavMeshAgent>();
-        attackController= animator.GetComponent<AttackController>();
-        attackController.SetAttackmaterial();
+        attackController = animator.GetComponent<AttackController>();
+        
+        attackTimer = 0f;
     }
 
-    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (attackController.targetToAttack!=null&&animator.transform.GetComponent<UnitMovement>().isCommandedToMove == false)
+        // Si ya no hay objetivo o fue destruido
+        if (!attackController.IsHealer() && 
+            (attackController.targetToAttack == null || 
+             !attackController.targetToAttack.gameObject.activeInHierarchy))
         {
-            lockAtTarget();
-            agent.SetDestination(attackController.targetToAttack.position);
+            animator.SetBool("isAttacking", false);
+            attackController.targetToAttack = null;
+            return;
+        }
 
-            if (attckTimer <= 0)
+
+        if (!animator.transform.GetComponent<UnitMovement>().isCommandedToMove)
+        {
+            float attackRange = attackController.GetAttackRange();
+            float distanceForTarget = Vector3.Distance(
+                attackController.targetToAttack.position,
+                animator.transform.position);
+
+            // Evitar errores de movimiento si el agente fue destruido
+            if (agent != null && agent.isOnNavMesh)
             {
-                Attack();
-                attckTimer = 1f / attackRate;
+                LookAtTarget();
+                agent.SetDestination(animator.transform.position);
+            }
+
+            if (attackTimer <= 0)
+            {
+                attackController.PerformAttack();
+                attackTimer = 1f / attackRate;
             }
             else
             {
-                attckTimer -= Time.deltaTime;
+                attackTimer -= Time.deltaTime;
             }
-            
-            float distanceForTarget=Vector3.Distance(attackController.targetToAttack.position,animator.transform.position);
-            if (distanceForTarget > stopAttackingDistance|| attackController.targetToAttack==null)
+
+            if (distanceForTarget > attackRange)
             {
-                
-                animator.SetBool("isAttacking",false);
-            } 
-                
-            
+                animator.SetBool("isAttacking", false);
+                attackController.targetToAttack = null;
+            }
         }
     }
-	private void Attack()
-    {
-        var damageToInflict = attackController.unitDamage;
 
-        attackController.targetToAttack.GetComponent<Unit>().TakeDamage(damageToInflict);
-
-    }
-    private void lockAtTarget()
+    private void LookAtTarget()
     {
-        Vector3 direction=attackController.targetToAttack.position-agent.transform.position;
-        agent.transform.rotation=Quaternion.LookRotation(direction);
-        
-        var yRotation=agent.transform.rotation.eulerAngles.y;
-        agent.transform.rotation=Quaternion.Euler(0,yRotation,0);
-    }
+        if (attackController.targetToAttack == null) return;
 
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        
+        Vector3 direction = attackController.targetToAttack.position - agent.transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        agent.transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
     }
 }
-
