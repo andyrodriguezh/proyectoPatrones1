@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 628649956612739514}
   - component: {fileID: 4869892770051120944}
   - component: {fileID: 6254309857755057131}
+  - component: {fileID: 5730960106463251381}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Player
@@ -188,6 +189,8 @@ MonoBehaviour:
   attackStateMaterial: {fileID: 2100000, guid: 2191a9beb2cbfb146a0767385fffe639, type: 2}
   isPlayer: 1
   unitDamage: 10
+  isHealerUnit: 0
+  healAmount: 10
   isRangedUnit: 0
   customAttackRange: 2
 --- !u!95 &4869892770051120944
@@ -233,6 +236,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5730960106463251381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4918298352899936138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd1db4dcc5c466f9b88389190dcc6cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  miningRadius: 5
+  miningRate: 2
+  isPlayer: 1
+  targetMine: {fileID: 0}
 --- !u!1 &6555121914925908650
 GameObject:
   m_ObjectHideFlags: 0

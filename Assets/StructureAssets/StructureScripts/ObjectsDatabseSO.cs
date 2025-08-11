@@ -61,12 +61,6 @@ namespace StructureAssets.StructureScripts
                 MilitaryBuilding
     }
     
-    [System.Serializable]
-    public class BuildRequirement
-    {
-        public string resource;
-        public int amount;
-    }
 
 
     [System.Serializable]

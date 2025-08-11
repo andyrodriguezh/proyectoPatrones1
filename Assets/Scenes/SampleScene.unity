@@ -1786,6 +1786,133 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &846608383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 846608387}
+  - component: {fileID: 846608386}
+  - component: {fileID: 846608385}
+  - component: {fileID: 846608384}
+  - component: {fileID: 846608388}
+  m_Layer: 0
+  m_Name: GoldMine
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &846608384
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846608383}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5, y: 5, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &846608385
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846608383}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &846608386
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846608383}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &846608387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846608383}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8, y: 3, z: 7}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &846608388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846608383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adebeb53b7b04bdcb981e051d483e993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentGold: 1000
+  maxGold: 1000
+  rechargeRate: 10
+  rechargeInterval: 5
+  goldPerExtraction: 10
+  extractionTime: 2
 --- !u!1 &885578229
 GameObject:
   m_ObjectHideFlags: 0
@@ -3968,9 +4095,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9afa8c991e4ee9b696e996a2d451c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  structureMask:
-    m_Bits: 512
-  notifier: {fileID: 1603800369}
 --- !u!1001 &1479699337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4771,6 +4895,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5766c01d5b44b7a4d9ce9f02c5c1f69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerGold: 0
+  enemyGold: 0
+  playerGoldTextName: PlayerGoldText
+  enemyGoldTextName: EnemyGoldText
 --- !u!4 &1643876565
 Transform:
   m_ObjectHideFlags: 0
@@ -6762,19 +6890,27 @@ PrefabInstance:
       objectReference: {fileID: 330585545}
     - target: {fileID: 4763921078852967159, guid: b918b61462fde4f418e0263299ae5165, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4763921078852967159, guid: b918b61462fde4f418e0263299ae5165, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4763921078852967159, guid: b918b61462fde4f418e0263299ae5165, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4918298352899936138, guid: b918b61462fde4f418e0263299ae5165, type: 3}
       propertyPath: m_Name
       value: Unit
+      objectReference: {fileID: 0}
+    - target: {fileID: 5730960106463251381, guid: b918b61462fde4f418e0263299ae5165, type: 3}
+      propertyPath: targetMine
+      value: 
+      objectReference: {fileID: 846608388}
+    - target: {fileID: 5730960106463251381, guid: b918b61462fde4f418e0263299ae5165, type: 3}
+      propertyPath: miningRadius
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8899485966551837810, guid: b918b61462fde4f418e0263299ae5165, type: 3}
       propertyPath: m_AnchorMax.x
@@ -6896,3 +7032,4 @@ SceneRoots:
   - {fileID: 1983962296}
   - {fileID: 633708338}
   - {fileID: 1265309491}
+  - {fileID: 846608387}
