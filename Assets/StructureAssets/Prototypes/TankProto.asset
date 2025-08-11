@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TankProto
   m_EditorClassIdentifier: 
   unitType: Tank
-  prefab: {fileID: 4918298352899936138, guid: b918b61462fde4f418e0263299ae5165, type: 3}
+  prefab: {fileID: 3134899366069025898, guid: 97ace2bfd2396b744b2ace62b44cf6b1, type: 3}
   requirements:
   - resource: Gold
     amount: 65

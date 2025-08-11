@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RangeProto
   m_EditorClassIdentifier: 
   unitType: Range
-  prefab: {fileID: 4918298352899936138, guid: b918b61462fde4f418e0263299ae5165, type: 3}
+  prefab: {fileID: 3928029152311964868, guid: e66070c0ec7f46e4f9382dbe1bbc7d56, type: 3}
   requirements:
   - resource: Gold
     amount: 45

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealerProto
   m_EditorClassIdentifier: 
   unitType: Healer
-  prefab: {fileID: 4918298352899936138, guid: b918b61462fde4f418e0263299ae5165, type: 3}
+  prefab: {fileID: 6427805370170333216, guid: 54ade30aef2328c46a43289078ab03c2, type: 3}
   requirements:
   - resource: Gold
     amount: 55
