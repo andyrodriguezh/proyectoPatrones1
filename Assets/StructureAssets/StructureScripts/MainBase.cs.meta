@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 1a4dd5bf480f1b44fa499884bd4976d3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - minerPrefab: {fileID: 4918298352899936138, guid: b918b61462fde4f418e0263299ae5165, type: 3}
+  - spawnPoint: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

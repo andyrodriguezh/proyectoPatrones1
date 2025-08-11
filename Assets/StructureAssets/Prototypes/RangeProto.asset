@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9855445fb6604247bca012ce726cb1df, type: 3}
+  m_Name: RangeProto
+  m_EditorClassIdentifier: 
+  unitType: Range
+  prefab: {fileID: 3928029152311964868, guid: e66070c0ec7f46e4f9382dbe1bbc7d56, type: 3}
+  requirements:
+  - resource: Gold
+    amount: 45
