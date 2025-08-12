@@ -9,8 +9,6 @@ public class BuildingSelectionUI : MonoBehaviour
 
     [SerializeField] private Button toggleBuildMenuButton;
 
-    [SerializeField] private Button buildMainBaseButton;
-    [SerializeField] private Button buildResourceCollectorButton;
     [SerializeField] private Button buildMilitaryBuildingButton;
 
     [SerializeField] private PlacementSystem placementSystem;
@@ -22,8 +20,7 @@ public class BuildingSelectionUI : MonoBehaviour
 
         toggleBuildMenuButton.onClick.AddListener(ToggleBuildMenu);
 
-        buildMainBaseButton.onClick.AddListener(() => TryBuildStructure(0));
-        buildResourceCollectorButton.onClick.AddListener(() => TryBuildStructure(1));
+        
         buildMilitaryBuildingButton.onClick.AddListener(() => TryBuildStructure(2));
     }
 
@@ -35,8 +32,7 @@ public class BuildingSelectionUI : MonoBehaviour
 
     private void UpdateButtonInteractivity()
     {
-        buildMainBaseButton.interactable = CheckRequirements(0);
-        buildResourceCollectorButton.interactable = CheckRequirements(1);
+      
         buildMilitaryBuildingButton.interactable = CheckRequirements(2);
     }
 
@@ -59,6 +55,7 @@ public class BuildingSelectionUI : MonoBehaviour
 
         if (ResourceManager.Instance.HasEnoughResources(data.requirements))
         {
+            ResourceManager.Instance.AddPlayerGold(-65);
             placementSystem.StartPlacement(id);
             buildMenuPanel.SetActive(false);
         }

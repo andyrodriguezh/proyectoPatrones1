@@ -12,8 +12,8 @@ public class AttackController : MonoBehaviour
     [SerializeField] private bool isHealerUnit;
     [SerializeField] private int healAmount = 10;
 
-    [SerializeField] private bool isRangedUnit;            // Definido en el inspector
-    [SerializeField] private float customAttackRange = 2f; // Configurable en el inspector
+    [SerializeField] private bool isRangedUnit;
+    [SerializeField] private float customAttackRange = 2f;
 
     private IAttackStrategy attackStrategy;
 
@@ -23,10 +23,8 @@ public class AttackController : MonoBehaviour
             attackStrategy = new HealStrategy(customAttackRange, healAmount);
         else if (isRangedUnit)
             attackStrategy = new RangedAttackStrategy(customAttackRange);
-        
         else
             attackStrategy = new MeleeAttackStrategy(customAttackRange);
-
     }
 
     public void PerformAttack()
@@ -36,9 +34,6 @@ public class AttackController : MonoBehaviour
 
         attackStrategy?.ExecuteAttack(this);
     }
-
-
-
 
     public float GetAttackRange()
     {
@@ -51,9 +46,7 @@ public class AttackController : MonoBehaviour
 
         if (isHealerUnit)
         {
-            // Detectar aliados por equipo (no enemigos)
             bool sameTeam = (isPlayer && other.CompareTag("Player")) || (!isPlayer && other.CompareTag("Enemy"));
-
             if (sameTeam)
             {
                 Unit unit = other.GetComponent<Unit>();
@@ -74,14 +67,10 @@ public class AttackController : MonoBehaviour
         }
     }
 
-
-
-
     public bool IsHealer()
     {
         return isHealerUnit;
     }
-   
 
     private void OnTriggerExit(Collider other)
     {
@@ -92,10 +81,6 @@ public class AttackController : MonoBehaviour
         }
     }
 
+    // Métodos para cambiar el material según el estado
 
-    
-    
-    
-
-    
 }

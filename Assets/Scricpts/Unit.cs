@@ -5,6 +5,8 @@ public class Unit : MonoBehaviour
     
     private float unitsHealth;
     public float unitMaxHealth=100;
+    public bool isBase;
+    
     
     public HealthTracker healthTracker;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,6 +47,15 @@ public class Unit : MonoBehaviour
         if (UnitSelectorManager.Instance != null)
         {
             UnitSelectorManager.Instance.allUnitsList.Remove(gameObject);
+            if (isBase == true)
+            {
+                
+                    Debug.Log("MainBase del jugador destruida. Fin del juego.");
+                    GameOverManager.Instance.TriggerGameOver();
+                
+                
+                
+            }
         }
     }
 

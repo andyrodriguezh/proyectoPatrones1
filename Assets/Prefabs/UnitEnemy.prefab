@@ -130,6 +130,8 @@ GameObject:
   - component: {fileID: 4654963748346072393}
   - component: {fileID: 5690510168611856971}
   - component: {fileID: 7086076567450516856}
+  - component: {fileID: 5290889919582017328}
+  - component: {fileID: 4176336637822842936}
   m_Layer: 8
   m_Name: UnitEnemy
   m_TagString: Enemy
@@ -281,6 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitMaxHealth: 100
+  isBase: 0
   healthTracker: {fileID: 8349772283168640460}
 --- !u!114 &8378209324566599504
 MonoBehaviour:
@@ -300,6 +303,10 @@ MonoBehaviour:
   attackStateMaterial: {fileID: 2100000, guid: 2191a9beb2cbfb146a0767385fffe639, type: 2}
   isPlayer: 0
   unitDamage: 10
+  isHealerUnit: 0
+  healAmount: 10
+  isRangedUnit: 0
+  customAttackRange: 2
 --- !u!95 &4261309166838352216
 Animator:
   serializedVersion: 7
@@ -350,7 +357,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7200998880195352747}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95b37bef87c8052428bfffc256002576, type: 3}
   m_Name: 
@@ -383,6 +390,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &5290889919582017328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7200998880195352747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4815672d5c0814d9f4359026d3796b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puntoDestino: {fileID: 0}
+--- !u!114 &4176336637822842936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7200998880195352747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b5be11cdbd36874599c58abecab34b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {fileID: 0}
+  loop: 0
+  waitTimeAtPoint: 0
 --- !u!1001 &8786718832040729705
 PrefabInstance:
   m_ObjectHideFlags: 0

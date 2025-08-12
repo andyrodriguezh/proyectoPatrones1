@@ -6,7 +6,7 @@ public class GameOverManager : MonoBehaviour
     public static GameOverManager Instance;
 
     [SerializeField] private GameObject gameOverPanel;
-
+    
     private void Awake()
     {
         if (Instance == null)
@@ -15,6 +15,7 @@ public class GameOverManager : MonoBehaviour
 
     private void Start()
     {
+        
         gameOverPanel.SetActive(false);
     }
 
@@ -23,6 +24,7 @@ public class GameOverManager : MonoBehaviour
         // Time.timeScale = 0f;
         gameOverPanel.SetActive(true);
     }
+    
 
     public void RestartGame()
     {
