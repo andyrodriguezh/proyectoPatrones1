@@ -30,7 +30,7 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 2318559926197995587, guid: b79240c6961b87743a7d78a3668f8b0d, type: 3}
     <requirements>k__BackingField:
     - resource: Gold
-      amount: 125
+      amount: 65
     <benefits>k__BackingField: []
     <Type>k__BackingField: 2
   - <Name>k__BackingField: ResourceRecolector

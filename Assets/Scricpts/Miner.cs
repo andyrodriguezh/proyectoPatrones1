@@ -14,7 +14,7 @@ public class MinerIdleState : IMinerState
 {
     public void Enter(Miner miner)
     {
-        miner.GetComponent<AttackController>().SetIdlematerial();
+        
         Debug.Log($"Minero {miner.gameObject.name}: Entrando en estado Idle");
     }
 
@@ -56,7 +56,7 @@ public class MinerMiningState : IMinerState
 
     public void Enter(Miner miner)
     {
-        miner.GetComponent<AttackController>().SetAttackmaterial();
+        
         miningTimer = 0f;
         Debug.Log($"Minero {miner.gameObject.name}: Entrando en estado Mining");
     }

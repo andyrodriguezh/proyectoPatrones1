@@ -82,24 +82,5 @@ public class AttackController : MonoBehaviour
     }
 
     // Métodos para cambiar el material según el estado
-    public void SetIdlematerial()
-    {
-        var renderer = GetComponent<Renderer>();
-        if (renderer != null && idleStateMaterial != null)
-            renderer.material = idleStateMaterial;
-    }
 
-    public void Setfollowmaterial()
-    {
-        var renderer = GetComponent<Renderer>();
-        if (renderer != null && followStateMaterial != null)
-            renderer.material = followStateMaterial;
-    }
-
-    public void SetAttackmaterial()
-    {
-        var renderer = GetComponent<Renderer>();
-        if (renderer != null && attackStateMaterial != null)
-            renderer.material = attackStateMaterial;
-    }
 }

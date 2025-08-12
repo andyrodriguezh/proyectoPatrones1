@@ -67,7 +67,7 @@ public class ResourceManager : MonoBehaviour
     {
         playerGold += amount;
         resources["Gold"] = playerGold; // Sincronizar con diccionario
-        Debug.Log($"Oro del jugador actualizado: +{amount} → Total: {playerGold}");
+        
         UpdateUI();
     }
 
