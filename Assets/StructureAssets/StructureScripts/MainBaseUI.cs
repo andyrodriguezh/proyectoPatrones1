@@ -36,6 +36,11 @@ public class MainBaseUI : MonoBehaviour, IStructureSelectionObserver, IStructure
         }
     }
 
+    public void OnSelectionCleared()
+    {
+        HidePanel();
+    }
+
     private void OnProduceMinerClicked()
     {
         _currentBase?.ProduceMiner();
