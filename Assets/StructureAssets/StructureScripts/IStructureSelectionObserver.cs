@@ -3,5 +3,6 @@
     public interface IStructureSelectionObserver
     {
         void OnStructureSelected(IStructure structure);
+        void OnSelectionCleared();
     }
 }
