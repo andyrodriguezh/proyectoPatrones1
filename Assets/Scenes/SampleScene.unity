@@ -1916,7 +1916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &690575223
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3352,7 +3352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1129488864
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5282,8 +5282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5766c01d5b44b7a4d9ce9f02c5c1f69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerGold: 0
-  enemyGold: 0
+  _playerGold: 0
+  _enemyGold: 0
   playerGoldTextName: PlayerGoldText
   enemyGoldTextName: EnemyGoldText
 --- !u!4 &1643876565
