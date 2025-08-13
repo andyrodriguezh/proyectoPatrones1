@@ -235,7 +235,7 @@ public class ResourceManager : MonoBehaviour
 
     #region Métodos directos (para uso interno por los comandos)
 
-    // Estos métodos son internos y no deberían usarse directamente desde fuera
+   
     internal void AgregarOroJugadorDirecto(int amount)
     {
         _playerGold += amount;
